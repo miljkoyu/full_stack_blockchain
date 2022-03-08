@@ -30,7 +30,7 @@ class Block{
         } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));
         
         //prikaz hash i broja pokusaja da se dobije hash koji odgovara tezini
-        console.log(difficulty, nonce, hash);
+        //console.log(difficulty, nonce, hash);
         
         return new this({
             timestamp,
