@@ -13,6 +13,7 @@ class Blockchain {
         });
 
         this.chain.push(newBlock);
+        //console.log(this.chain);
     }
 
     replaceChain(chain){

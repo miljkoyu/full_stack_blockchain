@@ -31,15 +31,15 @@ class Block{
         } while (hexToBinary(hash).substring(0, difficulty) !== '0'.repeat(difficulty));
         
         //prikaz hash i broja pokusaja da se dobije hash koji odgovara tezini
-        //console.log(difficulty, nonce, hash);
+        //console.log(data, difficulty, nonce, hash);
         
         return new this({
             timestamp,
             lastHash,
-            data: data,
-            difficulty,
+            hash,
+            data,
             nonce,
-            hash
+            difficulty
         });
     }
 
