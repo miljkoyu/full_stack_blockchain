@@ -1,38 +1,43 @@
-const redis = require ('redis');
+const PubNub = require('pubnub');
+
+const credentials = {
+    publishKey: 'pub-c-2a058f57-76cf-419b-b55a-45029cdc0721',
+    subscribeKey: 'sub-c-464977d8-a573-11ec-8a23-de1bbb7835db',
+    secretKey: 'sec-c-NDNiNzA2NTgtNTQzZS00ZWZiLTliYWMtYmVhNGQ1MDhkZTI5'
+};
 
 const CHANNELS = {
+    // TEST: 'TEST',
+    // TESTTWO: 'TESTTWO'
     TEST: 'TEST'
 };
 
 class PubSub {
-    constructor(){
-        // konekcija na redis na wsl u windowsu na hostu
-        this.publisher = redis.createClient();
-        this.subscriber = redis.createClient();
-        
-        //konekcija na docker contejner na istom kompu
-        // this.publisher = redis.createClient( { host: '127.0.0.1',
-        // port: 6380,});
-        // this.subscriber = redis.createClient( { host: '127.0.0.1',
-        // port: 6380,});
+    constructor() {
+        this.pubnub = new PubNub(credentials);
 
+        this.pubnub.subscribe({ channels: Object.values(CHANNELS)});
 
-        this.subscriber.subscribe(CHANNELS.TEST);
-
-        this.subscriber.on(
-            'message',
-            (channel, message) => this.handleMessage(channel, message));
+        this.pubnub.addListener(this.listener());
     }
 
-    handleMessage(channel, message){
-        console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
+    listener() {
+        return {
+            message: messageObject => {
+                const {channel, message} = messageObject;
+
+                console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
+            }
+        };
     }
+
+    publish({channel, message}){
+        this.pubnub.publish({ channel, message });
+    }
+
 }
 
-const testPubSub = new PubSub();
-// setTimeout(() => console.log(testPubSub.publisher.connected), 1000);
-setTimeout(() => testPubSub.publisher.publish(CHANNELS.TEST, 'foo'), 1000);
-// setTimeout(() => console.log(testPubSub.subscriber.connected), 1000);
-// setTimeout(() => testPubSub.publisher.publish(CHANNELS.TEST, 'food'), 5000);
-// setTimeout(() => console.log(testPubSub.publisher.connected), 10000);
-// setTimeout(() => testPubSub.publisher.publish(CHANNELS.TEST, 'foodd'), 10000);
+// const testPubSub = new PubSub();
+// testPubSub.publish({channel: CHANNELS.TEST, message: 'hello pubnub'});
+
+module.exports = PubSub;
