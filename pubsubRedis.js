@@ -7,14 +7,14 @@ const CHANNELS = {
 class PubSub {
     constructor(){
         // konekcija na redis na wsl u windowsu na hostu
-        this.publisher = redis.createClient();
-        this.subscriber = redis.createClient();
+        //this.publisher = redis.createClient();
+        //this.subscriber = redis.createClient();
         
         //konekcija na docker contejner na istom kompu
-        // this.publisher = redis.createClient( { host: '127.0.0.1',
-        // port: 6380,});
-        // this.subscriber = redis.createClient( { host: '127.0.0.1',
-        // port: 6380,});
+        this.publisher = redis.createClient( { host: '127.0.0.1',
+        port: 6380,});
+        this.subscriber = redis.createClient( { host: '127.0.0.1',
+        port: 6380,});
 
 
         this.subscriber.subscribe(CHANNELS.TEST);

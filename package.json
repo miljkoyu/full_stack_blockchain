@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --watchAll",
     "start": "node index.js",
-    "dev": "npm run start-redis && nodemon index.js",
+    "original_dev": "npm run start-redis && nodemon index.js",
+    "dev": "docker start rdb && nodemon index.js",
     "start-redis": "redis-server --daemonize yes"
   },
   "keywords": [],
