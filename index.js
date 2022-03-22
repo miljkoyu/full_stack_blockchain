@@ -18,10 +18,16 @@ app.get('/api/blocks', (req, res) => {
 
 app.post('/api/mine', (req, res) => {
     const { data } = req.body;
+    //const { data } = "123";
 
+    //console.log('111');
     //console.log(req.body);
+    //console.log({req});
+    //console.log({data});
 
-    blockchain.addBlock({ data });
+    blockchain.addBlock({ data }); 
+
+    pubsub.broadcastChain();
 
     res.redirect('/api/blocks');
 });
