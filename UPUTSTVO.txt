@@ -1,6 +1,8 @@
 npm install
 
-npm run test
+pokretenje svih testova u app
+    npm run test
+
 
 npm run dev
 
