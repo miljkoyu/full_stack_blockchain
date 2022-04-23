@@ -3,6 +3,9 @@ npm install
 pokretenje svih testova u app
     npm run test
 
+instaliraj Docker Engine
+docker run --detach --name rdb --publish 6380:6379 redis
+
 
 npm run dev
 
