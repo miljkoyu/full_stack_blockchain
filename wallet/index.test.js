@@ -21,7 +21,7 @@ describe('Wallet', () => {
     describe('signing data', () => {
         const data = 'foobar';
 
-        if('verifies a signature', () => {
+        it('verifies a signature', () => {
             expect(
                 verifySignature({
                     publicKey: wallet.publicKey,
@@ -31,7 +31,7 @@ describe('Wallet', () => {
             ).toBe(true);
         });
 
-        if('does not verify an invalid signature', () => {
+        it('does not verify an invalid signature', () => {
             expect(
                 verifySignature({
                     publicKey: wallet.publicKey,

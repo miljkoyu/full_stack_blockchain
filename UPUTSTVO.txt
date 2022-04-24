@@ -3,7 +3,12 @@ npm install
 pokretenje svih testova u app
     npm run test
 
-instaliraj Docker Engine
+instalirati Docker Engine
+restartovanje racunara
+instalirati wsl2 linux kernel update package for x64 machines
+https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+zatim instalirati Debian linux distribuciju sa microsoft store
+
 docker run --detach --name rdb --publish 6380:6379 redis
 
 
